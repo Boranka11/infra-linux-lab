@@ -58,9 +58,6 @@ Workflow file:
 
 .github/workflows/ci.yml
 
-## Security
-Secrets are stored in .env files and excluded from Git.
-
 ## Future Improvements
 - Automated database backups
 - Backup restore testing
