@@ -1,0 +1,19 @@
+# Secrets
+.env
+*.env
+
+# Backups
+backup/
+backups/
+*.sql
+
+# Ansible
+*.retry
+
+# Temporary files
+*.swp
+*.tmp
+
+# IDE
+.vscode/
+.idea/

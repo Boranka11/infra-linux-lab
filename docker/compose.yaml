@@ -1,0 +1,33 @@
+services:
+  db:
+    image: mariadb
+    container_name: lab
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: osticket
+      MARIADB_USER:  osticket
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql 
+    healthcheck:
+      test: ["CMD-SHELL", "healthcheck.sh --connect --innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10 
+  osticket:
+    image: devinsolutions/osticket:latest
+    container_name: lab-osticket
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: osticket
+      MYSQL_USER: osticket
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+volumes:
+  db_data:

@@ -1,0 +1,21 @@
+--- 
+- name: start deploy
+  hosts: servers
+  become: true 
+  tasks:
+    - name: install docker compose
+      ansible.builtin.apt:
+        name: docker-compose
+        state: present
+    - name: Start lab 
+      ansible.builtin.command:
+        cmd: docker compose up -d 
+        chdir: /home/bob/lab/docker
+      register: deploy_result
+      changed_when: >
+        'Created' in deploy_result.stderr or
+        'Started' in deploy_result.stderr or 
+        'Recreared' in deploy_result.stderr
+    - name:
+      ansible.builtin.debug:
+        var: deploy_result.stderr_lines 
