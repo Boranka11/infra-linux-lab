@@ -2,32 +2,32 @@
 - name: Auto linux server
   hosts: servers
   become: true
-   
+
   tasks:
     - name: Install Package
       apt:
         name:
-          - curl 
+          - curl
           - git
-          - ansible 
+          - ansible
         state: present
-        update_cache: true 
+        update_cache: true
     - name: Install ssh
       apt:
-        name: openssh-server 
+        name: openssh-server
         state: present
 
     - name: ssh enable
       service:
         name: ssh
-        state: started 
-        enabled: true 
-    - name: docker install 
+        state: started
+        enabled: true
+    - name: docker install
       ansible.builtin.apt:
         name: docker.io
         state: present
     - name: start docker
       ansible.builtin.service:
         name: docker
-        state: started 
+        state: started
         enabled: true

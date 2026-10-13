@@ -1,3 +1,4 @@
+---
 services:
   db:
     image: mariadb
@@ -9,12 +10,12 @@ services:
       MARIADB_USER:  osticket
       MARIADB_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - db_data:/var/lib/mysql 
+      - db_data:/var/lib/mysql
     healthcheck:
       test: ["CMD-SHELL", "healthcheck.sh --connect --innodb_initialized"]
       interval: 10s
       timeout: 5s
-      retries: 10 
+      retries: 10
   osticket:
     image: devinsolutions/osticket:latest
     container_name: lab-osticket
