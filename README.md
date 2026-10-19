@@ -70,7 +70,10 @@ The playbooks:
 - deploy the osTicket and MariaDB stack;
 - start and verify the services without manual application setup.
 
-Deployment command:
+Deployment command && Verification:
+
+`docker compose ps
+curl -I http://localhost:8080`
 
 ```bash
 ansible-playbook \
