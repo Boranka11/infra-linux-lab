@@ -58,8 +58,32 @@ Workflow file:
 
 .github/workflows/ci.yml
 
+## Reproducibility Test
+
+The full provisioning and application deployment were successfully validated on a clean Ubuntu VM using Ansible.
+
+The playbooks:
+- install Docker and Docker Compose;
+- configure required system packages;
+- create the application directory;
+- transfer Docker Compose configuration;
+- deploy the osTicket and MariaDB stack;
+- start and verify the services without manual application setup.
+
+Deployment command:
+
+```bash
+ansible-playbook \
+  -i ansible/inventory.ini \
+  ansible/setup.yml \
+  --limit testvm
+
+ansible-playbook \
+  -i ansible/inventory.ini \
+  ansible/deploy.yml \
+  --limit testvm
 ## Future Improvements
 - Automated database backups
 - Backup restore testing
 - HTTPS / reverse proxy
-- Ansible roles
+- Ansible roles``` 
