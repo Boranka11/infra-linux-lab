@@ -72,7 +72,7 @@ The playbooks:
 
 Deployment command && Verification:
 
-`docker compose ps
+`docker compose ps | 
 curl -I http://localhost:8080`
 
 ```bash
